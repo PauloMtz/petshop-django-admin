@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'django_adminlte',
+    'localflavor',
 ]
 
 MIDDLEWARE = [
