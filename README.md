@@ -1,6 +1,6 @@
 # Petshop Admin
 
-Aplicação Django para administração de petshop com painel do Django Admin e telas próprias para cadastro e listagem de clientes.
+Aplicação Django para administração de petshop com telas próprias para gerenciamento de clientes e pets, além da rota padrão do Django Admin.
 
 ## Requisitos
 
@@ -74,13 +74,22 @@ Depois disso, a aplicação ficará disponível em:
 - `http://127.0.0.1:8000/app/cliente/cadastro`
 - `http://127.0.0.1:8000/app/cliente/lista`
 
-## Funcionalidades atuais
+## Atualizações implementadas na aplicação
 
-- Painel administrativo do Django em `/admin/`
-- Cadastro de clientes com formulário separado em dados do cliente e endereço
-- Listagem de clientes em rota própria da aplicação
-- Modelos para clientes, endereços, pets, consultas e funcionários
+- Cadastro de clientes com formulário separado entre dados pessoais e endereço
+- Listagem de clientes com ações de visualizar, editar e remover
+- Tela de detalhes do cliente
+- Cadastro de pets vinculado a um cliente específico
+- Tela de detalhes do pet
+- Modelos persistidos para clientes, endereços, pets, consultas e funcionários
 - Campos de estado com opções brasileiras via `django-localflavor`
+
+## Estado atual das funcionalidades
+
+- O fluxo de clientes possui cadastro, listagem, edição, remoção e visualização de detalhes
+- O fluxo de pets possui cadastro por cliente e visualização de detalhes
+- As entidades `ConsultaPet` e `Funcionario` já existem no modelo de dados, mas ainda não possuem rotas próprias na aplicação
+- A interface já contém áreas visuais para histórico e consultas, porém esse fluxo ainda não está conectado a views públicas
 
 ## Criando acesso ao admin
 
@@ -143,9 +152,14 @@ Resumo do que já está configurado no projeto:
 
 ## Rotas atuais
 
-- `/admin/` para o Django Admin
+- `/admin/` para a área administrativa padrão do Django
 - `/app/cliente/cadastro` para cadastro de clientes
 - `/app/cliente/lista` para listagem de clientes
+- `/app/cliente/<id>` para exibir os detalhes de um cliente
+- `/app/cliente/editar/<id>` para editar um cliente existente
+- `/app/cliente/excluir/<id>` para confirmar e remover um cliente
+- `/app/pet/cadastro/<id>` para cadastrar um pet para o cliente informado
+- `/app/pet/<id>` para exibir os detalhes de um pet
 
 ## Estrutura atual do projeto
 
@@ -170,3 +184,4 @@ petshop-admin/
 - Ainda não existe um arquivo de dependências versionado, como `requirements.txt`
 - O projeto pode rodar com SQLite local ou MySQL, conforme a `ENV_DATABASE_URL`
 - O banco SQLite `db.sqlite3` já existe no projeto, mas as migrações continuam sendo necessárias ao preparar um novo ambiente
+- O código já possui estrutura para evolução do módulo de consultas, mas esse fluxo ainda não foi exposto por URLs da aplicação
