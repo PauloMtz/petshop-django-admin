@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from app.services import consulta_service
 from ..forms import pet_forms
 from ..entidades import pet
 from ..services import pet_service, cliente_service
@@ -22,7 +24,8 @@ def inserir_pet(request, id):
 
 def buscar_pet_id(request, id):
     pet = pet_service.buscar_pet_id(id)
-    return render(request, 'pets/detalhes_pet.html', {'pet': pet})
+    consultas = consulta_service.listar_consultas(id)
+    return render(request, 'pets/detalhes_pet.html', {'pet': pet, 'consultas': consultas})
 
 def editar_pet(request, id):
     pet_antigo = pet_service.buscar_pet_id(id)

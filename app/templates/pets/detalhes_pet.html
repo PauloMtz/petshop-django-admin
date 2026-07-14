@@ -40,7 +40,7 @@ Listagem de Pet
                     <br>
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-primary btn-block">
+                            <a href="{% url 'cadastrar_consulta' pet.id %}" class="btn btn-primary btn-block">
                                 Cadastrar Consulta
                             </a>
                         </div>
@@ -66,25 +66,27 @@ Listagem de Pet
                         </span>
                             </li>
 
+                            {% for consulta in consultas %}
                             <li>
                                 <i class="fa fa-paw bg-blue"></i>
                                 <div class="timeline-item">
                                     <span class="time"> <i class="fa fa-calendar"></i>
-                                        Data da consulta
+                                        {{consulta.data}}
                                     </span>
                                     <h3 class="timeline-header">
-                                        O PET realizou nova consulta
+                                        {{consulta.pet.nome}} realizou nova consulta
                                     </h3>
                                     <div class="timeline-body">
-                                        Motivo da consulta
+                                        {{consulta.motivo_consulta}}
                                     </div>
                                     <div class="timeline-footer">
-                                      <a class="btn btn-primary btn-xs" href="#">
+                                      <a class="btn btn-primary btn-xs" href="{% url 'buscar_consulta_id' consulta.id %}">
                                         Visualizar consulta
                                       </a>
                                     </div>
                                 </div>
                             </li>
+                            {% endfor %}
 
                             <!-- END timeline item -->
 

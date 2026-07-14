@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 
+from app.services import consulta_service
+
 from ..forms.cliente_forms import ClienteForm
 from ..forms.endereco_forms import EnderecoClienteForm
 from ..entidades import cliente, endereco
-from ..services import cliente_service, endereco_service
+from ..services import cliente_service, endereco_service, pet_service
 
 # Create your views here.
 def listar_clientes(request):
@@ -13,7 +15,9 @@ def listar_clientes(request):
 
 def buscar_cliente_id(request, id):
     cliente = cliente_service.buscar_cliente_id(id)
-    return render(request, 'clientes/detalhes_cliente.html', {'cliente': cliente})
+    pets = pet_service.listar_pets(id)
+    consultas = consulta_service.listar_consultas_pets(id)
+    return render(request, 'clientes/detalhes_cliente.html', {'cliente': cliente, 'pets': pets, 'consultas': consultas})
 
 def remover_cliente(request, id):
     cliente = cliente_service.buscar_cliente_id(id)

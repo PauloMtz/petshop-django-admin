@@ -34,17 +34,19 @@ Detalhes do cliente
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <a href="#">
-                <strong><i class="fa fa-paw margin-r-5"></i> Nome do Pet</strong>
+              {% for pet in pets %}
+              <a href="{% url 'buscar_pet_id' pet.id %}">
+                <strong><i class="fa fa-paw margin-r-5"></i> {{pet.nome}}</strong>
               </a>
 
               <p class="text-muted">
-                categoria - cor
+                {{pet.get_categoria_display}} - {{pet.get_cor_display}}
               </p>
               <hr>
+              {% endfor %}
               <div class="row">
                 <div class="col-md-12">
-                  <a href="#" class="btn btn-primary btn-block">Cadastrar Pet</a>
+                  <a href="{% url 'cadastrar_pet' cliente.id %}" class="btn btn-primary btn-block">Cadastrar Pet</a>
                 </div>
               </div>
 
@@ -64,29 +66,31 @@ Detalhes do cliente
                         <ul class="timeline timeline-inverse">
                             <li class="time-label">
                         <span class="bg-red">
-                          10 Feb. 2024
+                          {% now "SHORT_DATE_FORMAT" %}
                         </span>
                             </li>
 
+                            {% for consulta in consultas %}
                             <li>
                                 <i class="fa fa-paw bg-blue"></i>
                                 <div class="timeline-item">
                                     <span class="time"> <i class="fa fa-calendar"></i>
-                                        Data da consulta
+                                        {{consulta.data}}
                                     </span>
                                     <h3 class="timeline-header">
-                                        O pet realizou nova consulta
+                                        {{consulta.pet.nome}} realizou nova consulta
                                     </h3>
                                     <div class="timeline-body">
-                                        Motivo da consulta
+                                        {{consulta.motivo_consulta}}
                                     </div>
                                     <div class="timeline-footer">
-                                      <a class="btn btn-primary btn-xs" href="#">
+                                      <a class="btn btn-primary btn-xs" href="{% url 'buscar_consulta_id' consulta.id %}">
                                         Visualizar consulta
                                       </a>
                                     </div>
                                 </div>
                             </li>
+                            {% endfor %}
 
                             <!-- END timeline item -->
 

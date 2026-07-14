@@ -81,6 +81,9 @@ Depois disso, a aplicação ficará disponível em:
 - Tela de detalhes do cliente
 - Cadastro de pets vinculado a um cliente específico
 - Tela de detalhes do pet
+- Cadastro de consultas vinculado a um pet específico
+- Tela de detalhes da consulta
+- Histórico de consultas exibido no perfil do cliente e no perfil do pet
 - Modelos persistidos para clientes, endereços, pets, consultas e funcionários
 - Campos de estado com opções brasileiras via `django-localflavor`
 
@@ -88,8 +91,9 @@ Depois disso, a aplicação ficará disponível em:
 
 - O fluxo de clientes possui cadastro, listagem, edição, remoção e visualização de detalhes
 - O fluxo de pets possui cadastro por cliente e visualização de detalhes
-- As entidades `ConsultaPet` e `Funcionario` já existem no modelo de dados, mas ainda não possuem rotas próprias na aplicação
-- A interface já contém áreas visuais para histórico e consultas, porém esse fluxo ainda não está conectado a views públicas
+- O fluxo de consultas possui cadastro por pet e visualização de detalhes
+- O histórico de consultas aparece na tela de detalhes do cliente e do pet
+- A entidade `Funcionario` já existe no modelo de dados, mas ainda não possui rotas próprias na aplicação
 
 ## Criando acesso ao admin
 
@@ -160,6 +164,8 @@ Resumo do que já está configurado no projeto:
 - `/app/cliente/excluir/<id>` para confirmar e remover um cliente
 - `/app/pet/cadastro/<id>` para cadastrar um pet para o cliente informado
 - `/app/pet/<id>` para exibir os detalhes de um pet
+- `/app/consulta/cadastro/<id>` para cadastrar uma consulta para o pet informado
+- `/app/consulta/<id>` para exibir os detalhes de uma consulta
 
 ## Estrutura atual do projeto
 
@@ -184,4 +190,5 @@ petshop-admin/
 - Ainda não existe um arquivo de dependências versionado, como `requirements.txt`
 - O projeto pode rodar com SQLite local ou MySQL, conforme a `ENV_DATABASE_URL`
 - O banco SQLite `db.sqlite3` já existe no projeto, mas as migrações continuam sendo necessárias ao preparar um novo ambiente
-- O código já possui estrutura para evolução do módulo de consultas, mas esse fluxo ainda não foi exposto por URLs da aplicação
+- O módulo de consultas já possui rotas públicas para cadastro e detalhamento, mas ainda pode evoluir com listagens e manutenção próprias
+- A entidade `Funcionario` segue disponível apenas no modelo de dados e no admin, sem fluxo público dedicado

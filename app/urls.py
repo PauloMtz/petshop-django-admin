@@ -1,6 +1,6 @@
 from django.urls import path
 
-from app.views import pet_views
+from app.views import consulta_views, pet_views
 from .views import cliente_views
 
 urlpatterns = [
@@ -13,4 +13,7 @@ urlpatterns = [
     # Rotas de pets
     path('pet/cadastro/<int:id>', pet_views.inserir_pet, name='cadastrar_pet'),
     path('pet/<int:id>', pet_views.buscar_pet_id, name='buscar_pet_id'),
+    # Rotas de consultas
+    path('consulta/cadastro/<int:id>', consulta_views.inserir_consulta, name='cadastrar_consulta'),
+    path('consulta/<int:id>', consulta_views.buscar_consulta_id, name='buscar_consulta_id'),
 ]
