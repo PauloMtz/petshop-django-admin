@@ -70,6 +70,7 @@ python manage.py runserver
 
 Depois disso, a aplicação ficará disponível em:
 
+- `http://127.0.0.1:8000/login/`
 - `http://127.0.0.1:8000/admin/`
 - `http://127.0.0.1:8000/app/cliente/cadastro`
 - `http://127.0.0.1:8000/app/cliente/lista`
@@ -88,6 +89,7 @@ Depois disso, a aplicação ficará disponível em:
 - Histórico de consultas exibido no perfil do cliente e no perfil do pet
 - Cadastro de funcionários com formulário próprio
 - Listagem de funcionários
+- Autenticação com tela de login e rota de logout
 - Modelos persistidos para clientes, endereços, pets, consultas e funcionários
 - Campos de estado com opções brasileiras via `django-localflavor`
 
@@ -97,8 +99,24 @@ Depois disso, a aplicação ficará disponível em:
 - O fluxo de pets possui cadastro por cliente e visualização de detalhes
 - O fluxo de consultas possui cadastro por pet e visualização de detalhes
 - O fluxo de funcionários possui cadastro e listagem
+- O fluxo de autenticação possui login e logout usando a autenticação padrão do Django com tela própria
 - O histórico de consultas aparece na tela de detalhes do cliente e do pet
 - A entidade `Funcionario` possui tela de cadastro e listagem próprias na aplicação
+
+## Autenticação
+
+O projeto possui autenticação com formulário próprio baseado em `AuthenticationForm` do Django.
+
+Rotas disponíveis:
+
+- `/login/` para autenticação de usuários
+- `/logout/` para encerrar a sessão autenticada
+
+Observação importante sobre a configuração das URLs:
+
+- As rotas de autenticação precisaram ser definidas em `setup/urls.py`
+- A tentativa de mantê-las em `app/urls.py` não funcionou corretamente no projeto
+- Por isso, o arquivo de rotas da aplicação continua responsável apenas pelos módulos funcionais, como clientes, pets, consultas e funcionários
 
 ## Criando acesso ao admin
 
@@ -161,6 +179,8 @@ Resumo do que já está configurado no projeto:
 
 ## Rotas atuais
 
+- `/login/` para autenticar usuários
+- `/logout/` para encerrar a sessão do usuário autenticado
 - `/admin/` para a área administrativa padrão do Django
 - `/app/cliente/cadastro` para cadastro de clientes
 - `/app/cliente/lista` para listagem de clientes
@@ -197,5 +217,6 @@ petshop-admin/
 - Ainda não existe um arquivo de dependências versionado, como `requirements.txt`
 - O projeto pode rodar com SQLite local ou MySQL, conforme a `ENV_DATABASE_URL`
 - O banco SQLite `db.sqlite3` já existe no projeto, mas as migrações continuam sendo necessárias ao preparar um novo ambiente
+- As rotas de autenticação foram mantidas em `setup/urls.py` porque não funcionaram corretamente quando ficaram em `app/urls.py`
 - O módulo de consultas já possui rotas públicas para cadastro e detalhamento, mas ainda pode evoluir com listagens e manutenção próprias
 - O módulo de funcionários já possui fluxo público de cadastro e listagem, mas ainda pode evoluir com visualização de detalhes, edição e remoção

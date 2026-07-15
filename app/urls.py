@@ -1,7 +1,6 @@
 from django.urls import path
 
-from app.views import consulta_views, funcionario_views, pet_views
-from .views import cliente_views
+from .views import cliente_views, consulta_views, funcionario_views, pet_views
 
 urlpatterns = [
     # Rotas de clientes
