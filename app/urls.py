@@ -1,6 +1,6 @@
 from django.urls import path
 
-from app.views import consulta_views, pet_views
+from app.views import consulta_views, funcionario_views, pet_views
 from .views import cliente_views
 
 urlpatterns = [
@@ -16,4 +16,7 @@ urlpatterns = [
     # Rotas de consultas
     path('consulta/cadastro/<int:id>', consulta_views.inserir_consulta, name='cadastrar_consulta'),
     path('consulta/<int:id>', consulta_views.buscar_consulta_id, name='buscar_consulta_id'),
+    # Rotas de funcionarios
+    path('funcionario/cadastro', funcionario_views.inserir_funcionario, name='cadastrar_funcionario'),
+    path('funcionario/lista', funcionario_views.listar_funcionarios, name='listar_funcionarios'),
 ]

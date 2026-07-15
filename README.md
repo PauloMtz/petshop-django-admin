@@ -1,6 +1,6 @@
 # Petshop Admin
 
-Aplicação Django para administração de petshop com telas próprias para gerenciamento de clientes e pets, além da rota padrão do Django Admin.
+Aplicação Django para administração de petshop com telas próprias para gerenciamento de clientes, pets, consultas e funcionários, além da rota padrão do Django Admin.
 
 ## Requisitos
 
@@ -73,6 +73,8 @@ Depois disso, a aplicação ficará disponível em:
 - `http://127.0.0.1:8000/admin/`
 - `http://127.0.0.1:8000/app/cliente/cadastro`
 - `http://127.0.0.1:8000/app/cliente/lista`
+- `http://127.0.0.1:8000/app/funcionario/cadastro`
+- `http://127.0.0.1:8000/app/funcionario/lista`
 
 ## Atualizações implementadas na aplicação
 
@@ -84,6 +86,8 @@ Depois disso, a aplicação ficará disponível em:
 - Cadastro de consultas vinculado a um pet específico
 - Tela de detalhes da consulta
 - Histórico de consultas exibido no perfil do cliente e no perfil do pet
+- Cadastro de funcionários com formulário próprio
+- Listagem de funcionários
 - Modelos persistidos para clientes, endereços, pets, consultas e funcionários
 - Campos de estado com opções brasileiras via `django-localflavor`
 
@@ -92,8 +96,9 @@ Depois disso, a aplicação ficará disponível em:
 - O fluxo de clientes possui cadastro, listagem, edição, remoção e visualização de detalhes
 - O fluxo de pets possui cadastro por cliente e visualização de detalhes
 - O fluxo de consultas possui cadastro por pet e visualização de detalhes
+- O fluxo de funcionários possui cadastro e listagem
 - O histórico de consultas aparece na tela de detalhes do cliente e do pet
-- A entidade `Funcionario` já existe no modelo de dados, mas ainda não possui rotas próprias na aplicação
+- A entidade `Funcionario` possui tela de cadastro e listagem próprias na aplicação
 
 ## Criando acesso ao admin
 
@@ -166,6 +171,8 @@ Resumo do que já está configurado no projeto:
 - `/app/pet/<id>` para exibir os detalhes de um pet
 - `/app/consulta/cadastro/<id>` para cadastrar uma consulta para o pet informado
 - `/app/consulta/<id>` para exibir os detalhes de uma consulta
+- `/app/funcionario/cadastro` para cadastrar um funcionário
+- `/app/funcionario/lista` para listar os funcionários cadastrados
 
 ## Estrutura atual do projeto
 
@@ -191,4 +198,4 @@ petshop-admin/
 - O projeto pode rodar com SQLite local ou MySQL, conforme a `ENV_DATABASE_URL`
 - O banco SQLite `db.sqlite3` já existe no projeto, mas as migrações continuam sendo necessárias ao preparar um novo ambiente
 - O módulo de consultas já possui rotas públicas para cadastro e detalhamento, mas ainda pode evoluir com listagens e manutenção próprias
-- A entidade `Funcionario` segue disponível apenas no modelo de dados e no admin, sem fluxo público dedicado
+- O módulo de funcionários já possui fluxo público de cadastro e listagem, mas ainda pode evoluir com visualização de detalhes, edição e remoção
