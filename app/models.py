@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from localflavor.br.br_states import STATE_CHOICES
 
 # Create your models here.
@@ -44,7 +45,7 @@ class ConsultaPet(models.Model):
     exames_prescritos = models.TextField(null=False, blank=True)
 
 
-class Funcionario(models.Model):
+class Funcionario(AbstractUser):
     CARGO_CHOICES = [
         (1, 'Veterinario'),
         (2, 'Financeiro'),

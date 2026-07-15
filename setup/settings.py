@@ -124,3 +124,6 @@ STATIC_URL = 'static/'
 
 # Define o tipo padrão da chave primária automática criada pelo Django nos models.
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# vai utilizar o model funcionario para autenticação
+AUTH_USER_MODEL = "app.Funcionario"
