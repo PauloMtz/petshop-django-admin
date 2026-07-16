@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from app.services import consulta_service
 
@@ -8,17 +9,19 @@ from ..forms.endereco_forms import EnderecoClienteForm
 from ..entidades import cliente, endereco
 from ..services import cliente_service, endereco_service, pet_service
 
-# Create your views here.
+@login_required(login_url='login')
 def listar_clientes(request):
     clientes = cliente_service.listar_clientes()
     return render(request, 'clientes/lista_clientes.html', {'clientes': clientes})
 
+@login_required(login_url='login')
 def buscar_cliente_id(request, id):
     cliente = cliente_service.buscar_cliente_id(id)
     pets = pet_service.listar_pets(id)
     consultas = consulta_service.listar_consultas_pets(id)
     return render(request, 'clientes/detalhes_cliente.html', {'cliente': cliente, 'pets': pets, 'consultas': consultas})
 
+@user_passes_test(lambda u: u.cargo == 2, login_url='login')
 def remover_cliente(request, id):
     cliente = cliente_service.buscar_cliente_id(id)
     endereco = endereco_service.buscar_endereco_id(cliente.endereco.id)
@@ -28,6 +31,7 @@ def remover_cliente(request, id):
         return redirect('listar_clientes')
     return render(request, 'clientes/confirma_exclusao.html', {'cliente': cliente})
 
+@user_passes_test(lambda u: u.cargo == 2, login_url='login')
 def cadastrar_cliente(request):
     if request.method == "POST":
         form_cliente = ClienteForm(request.POST)
@@ -53,6 +57,7 @@ def cadastrar_cliente(request):
         form_endereco = EnderecoClienteForm()
     return render(request, 'clientes/form_cliente.html', {'form_cliente': form_cliente, 'form_endereco': form_endereco})
 
+@user_passes_test(lambda u: u.cargo == 2, login_url='login')
 def editar_cliente(request, id):
     cliente_editar = cliente_service.buscar_cliente_id(id)
     cliente_editar.data_nascimento = cliente_editar.data_nascimento.strftime('%Y-%m-%d')

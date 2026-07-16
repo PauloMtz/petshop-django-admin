@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 from app.services import consulta_service
 from ..forms import pet_forms
 from ..entidades import pet
 from ..services import pet_service, cliente_service
 
+@login_required(login_url='login')
 def inserir_pet(request, id):
     if request.method == "POST":
         form_pet = pet_forms.PetForm(request.POST)
@@ -22,11 +23,13 @@ def inserir_pet(request, id):
         form_pet = pet_forms.PetForm()
     return render(request, 'pets/form_pet.html', {'form_pet': form_pet})
 
+@login_required(login_url='login')
 def buscar_pet_id(request, id):
     pet = pet_service.buscar_pet_id(id)
     consultas = consulta_service.listar_consultas(id)
     return render(request, 'pets/detalhes_pet.html', {'pet': pet, 'consultas': consultas})
 
+@login_required(login_url='login')
 def editar_pet(request, id):
     pet_antigo = pet_service.buscar_pet_id(id)
     form_pet = pet_forms.PetForm(request.POST or None, instance=pet_antigo)

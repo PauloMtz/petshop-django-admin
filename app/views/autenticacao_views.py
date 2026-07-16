@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 def login_usuario(request):
     if request.method == 'POST':
@@ -20,6 +21,7 @@ def login_usuario(request):
         form_login = AuthenticationForm()
     return render(request, 'autenticacao/login.html', {'form_login': form_login})
 
+@login_required(login_url='login')
 def logout_usuario(request):
     logout(request)
     return redirect('login')
