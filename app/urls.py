@@ -15,6 +15,7 @@ urlpatterns = [
     # Rotas de consultas
     path('consulta/cadastro/<int:id>', consulta_views.inserir_consulta, name='cadastrar_consulta'),
     path('consulta/<int:id>', consulta_views.buscar_consulta_id, name='buscar_consulta_id'),
+    path('consulta/enviar_email/<int:id>', consulta_views.enviar_email_consulta, name='enviar_email_consulta'),
     # Rotas de funcionarios
     path('funcionario/cadastro', funcionario_views.inserir_funcionario, name='cadastrar_funcionario'),
     path('funcionario/lista', funcionario_views.listar_funcionarios, name='listar_funcionarios'),
